@@ -21,10 +21,18 @@ let bankAccount = {
     },
 
     set balance(newBalance) {
-        this._balance = newBalance
-        return console.log(this.formattedBalance);
+        if (typeof newBalance === 'number') {
+            this._balance = newBalance
+        } else {
+            throw new Error('please use type number');
+        }
+       
+        return this.formattedBalance;
     },
     transfer(bankAccount, targetAccount, amount) {
+        if (amount > this._balance) {
+            throw new Error (`Please use amound lower than currect balance ${this._balance}`);
+        }
         this._balance -= amount;
         targetAccount.balance = Number(targetAccount.formattedBalance.slice(1)) + amount;
     }
@@ -37,8 +45,13 @@ let bankAccount2 = {
         return `$${this._balance}`
     },
     set balance(newBalance) {
-        this._balance = newBalance
-        return console.log(this.formattedBalance);
+        if (typeof newBalance === 'number') {
+            this._balance = newBalance
+        } else {
+            throw new Error('please use type number');
+        }
+
+        return this.formattedBalance;
     },
 
 }
@@ -47,7 +60,7 @@ console.log(bankAccount.formattedBalance)
 //bankAccount.balance = 2000;
 
 console.log(bankAccount2.formattedBalance)
-console.log(bankAccount.transfer(bankAccount, bankAccount2, 200))
+bankAccount.transfer(bankAccount, bankAccount2, 200)
 console.log(bankAccount)
 console.log(bankAccount2.formattedBalance)
 

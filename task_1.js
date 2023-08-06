@@ -26,7 +26,7 @@ let person = {
     age: 30,
     email: "john.doe@example.com",
     updateInfo(object) {
-        writableFrobidden(true)
+        writableForbidden(true)
 
         for (const property in object) {
             if (object.hasOwnProperty(property)) {
@@ -34,17 +34,16 @@ let person = {
             }
         }
 
-        writableFrobidden(false)
+        writableForbidden(false)
     }
 }
 
-writableFrobidden(false)
+writableForbidden(false)
 
-function writableFrobidden(value) {
+function writableForbidden(value) {
     for (const key in person) {
         Object.defineProperty(person, key, {
             writable: value,
-            configurable: true,
         })
     }
 }
