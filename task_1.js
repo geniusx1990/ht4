@@ -26,15 +26,12 @@ let person = {
     age: 30,
     email: "john.doe@example.com",
     updateInfo(object) {
-        writableForbidden(true)
 
         for (const property in object) {
             if (object.hasOwnProperty(property)) {
                 this[`${property}`] = object[`${property}`];
             }
         }
-
-        writableForbidden(false)
     }
 }
 
@@ -51,9 +48,12 @@ function writableForbidden(value) {
 
 //Testing;
 
+person.grades = [1, 2, 3, 4];
+
 let newObject = {
     firstName: "Jane",
-    age: 32
+    age: 32,
+    grades: {}
 }
 console.log(Object.values(person));
 
